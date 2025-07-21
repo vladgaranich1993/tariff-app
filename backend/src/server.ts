@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import * as fs from 'fs';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
@@ -24,32 +23,6 @@ mongoose
     console.error('❌ MongoDB connection error:', err);
     process.exit(1);
   });
-
-type ElectricityRow = {
-  provider: string;
-  zip: string[];
-  pricePerKWh: number;
-  basePrice: number;
-  bonus: number;
-  contractTermMonths: number;
-};
-
-const electricity: ElectricityRow[] = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, '../data/electricity.json'),
-    'utf-8'
-  )
-);
-
-const internetData: {
-  provider: string
-  zip: string[]
-  speedMbps: number
-  pricePerMonth: number
-  contractTermMonths: number
-}[] = JSON.parse(
-  fs.readFileSync(path.join(__dirname, '../data/internet.json'), 'utf-8')
-)
 
 const app = express();
 app.use(cors());
