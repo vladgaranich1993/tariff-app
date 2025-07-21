@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { ELECTRICITY_ZIPS } from '@/lib/calcPrice';
+import { useEffect, useState } from 'react';
 
 const schema = z.object({
   zip: z.string().length(4, '4‑digit ZIP'),
@@ -20,6 +20,13 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function CompareWizard() {
+  const [zips, setZips] = useState<string[]>([]);
+  useEffect(() => {
+    fetch('/api/electricity/zips')
+      .then(res => res.json())
+      .then(setZips)
+      .catch(console.error);
+  }, []);
   const router = useRouter();
   const {
     register,
@@ -45,11 +52,9 @@ export default function CompareWizard() {
         <label className="block">
           <span>ZIP code</span>
           <select {...register('zip')} className="input">
-            <option value="">Select ZIP…</option>
-            {ELECTRICITY_ZIPS.map((z: string) => (
-              <option key={z} value={z}>
-                {z}
-              </option>
+            <option value="">Loading ZIPs…</option>
+            {zips.map(z => (
+              <option key={z} value={z}>{z}</option>
             ))}
           </select>
           {errors.zip && <p className="error">{errors.zip.message}</p>}

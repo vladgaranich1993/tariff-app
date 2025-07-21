@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".", // makes “@/” and any paths relative to the repo root
+        "paths": {
+            "@data/*": [
+                "backend/src/lib/*"
+            ]
+        }
+    }
+}

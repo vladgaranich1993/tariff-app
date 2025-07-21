@@ -1,10 +1,10 @@
 'use client';
 
 import Wizard from '@/components/Wizard';
-import { INTERNET_ZIPS } from '@/lib/internetData';
+import { getInternetZips } from '@/lib/internetData';
 
 const fields = [
-  { name: 'zip', label: 'ZIP code', type: 'select' as const, options: INTERNET_ZIPS },
+  { name: 'zip', label: 'ZIP code', type: 'select' as const, options: await getInternetZips() },
   {
     name: 'speed',
     label: 'Desired Mbps',

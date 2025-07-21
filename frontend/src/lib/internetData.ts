@@ -1,10 +1,25 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import data from '@/data/internet.json';
+export type InternetQuote = {
+  provider: string;
+  pricePerMonth: number;
+  speedMbps: number;
+};
 
-/** Sorted list of all ZIP codes for the <select> */
-export const INTERNET_ZIPS = Array.from(
-  new Set(data.flatMap((p: { zip: string[] }) => p.zip))
-).sort();
+const fetcher = (url: string) => fetch(url).then(r => {
+  if (!r.ok) throw new Error(`API error ${r.status}`);
+  return r.json();
+});
 
-export default data;
+export async function getInternetZips(): Promise<string[]> {
+  const response = await fetch('http://localhost:4000/api/internet/zips');
+  if (!response.ok) throw new Error(`API error ${response.status}`);
+  return response.json();
+}
+
+export function getInternetQuotes(
+  zip: string,
+  speed: number
+): Promise<InternetQuote[]> {
+  return fetcher(
+    `/api/internet/quotes?zip=${encodeURIComponent(zip)}&speed=${speed}`
+  );
+}
