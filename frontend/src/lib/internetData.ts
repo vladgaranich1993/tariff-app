@@ -1,3 +1,5 @@
+'use client';
+
 export type InternetQuote = {
   provider: string;
   pricePerMonth: number;
@@ -10,7 +12,7 @@ const fetcher = (url: string) => fetch(url).then(r => {
 });
 
 export async function getInternetZips(): Promise<string[]> {
-  const response = await fetch('http://localhost:4000/api/internet/zips');
+  const response = await fetch('/api/internet/zips');
   if (!response.ok) throw new Error(`API error ${response.status}`);
   return response.json();
 }

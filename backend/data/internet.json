@@ -1,72 +1,106 @@
 [
-  {
-    "provider": "FiberMax",
-    "zip": ["1010", "1030", "1220"],
-    "speedMbps": 250,
-    "pricePerMonth": 29.9,
-    "contractTermMonths": 24
-  },
-  {
-    "provider": "WaveNet",
-    "zip": ["1010", "1070"],
-    "speedMbps": 500,
-    "pricePerMonth": 39.9,
-    "contractTermMonths": 12
-  },
-  {
-    "provider": "CityFiber",
-    "zip": ["1220"],
-    "speedMbps": 1000,
-    "pricePerMonth": 55,
-    "contractTermMonths": 24
-  },
-  {
-    "provider": "BroadbandPlus",
-    "zip": ["1010", "1040", "1050"],
-    "speedMbps": 100,
-    "pricePerMonth": 19.9,
-    "contractTermMonths": 12
-  },
-  {
-    "provider": "NetConnect",
-    "zip": ["1060", "1080"],
-    "speedMbps": 200,
-    "pricePerMonth": 34.9,
-    "contractTermMonths": 12
-  },
-  {
-    "provider": "UltraSpeed",
-    "zip": ["1090", "1100"],
-    "speedMbps": 1000,
-    "pricePerMonth": 49.9,
-    "contractTermMonths": 24
-  },
-  {
-    "provider": "Streamline",
-    "zip": ["1010", "1020", "1030"],
-    "speedMbps": 150,
-    "pricePerMonth": 24.9,
-    "contractTermMonths": 12
-  },
-  {
-    "provider": "ConnectNow",
-    "zip": ["1040", "1050", "1060"],
-    "speedMbps": 300,
-    "pricePerMonth": 44.9,
-    "contractTermMonths": 24
-  },
-  {
-    "provider": "SpeedyNet",
-    "zip": ["1070", "1080", "1090"],
-    "speedMbps": 500,
-    "pricePerMonth": 59.9,
-    "contractTermMonths": 12
-  },
-  {
-    "provider": "FiberOptic",
-    "zip": ["1100", "1110"],
-    "speedMbps": 1000,
-    "pricePerMonth": 69.9,
-    "contractTermMonths": 24
-  }
+    {
+        "provider": "FiberMax",
+        "zip": [
+            "1010",
+            "1030",
+            "1220"
+        ],
+        "speedMbps": 250,
+        "pricePerMonth": 29.9,
+        "contractTermMonths": 24
+    },
+    {
+        "provider": "WaveNet",
+        "zip": [
+            "1010",
+            "1070"
+        ],
+        "speedMbps": 500,
+        "pricePerMonth": 39.9,
+        "contractTermMonths": 12
+    },
+    {
+        "provider": "CityFiber",
+        "zip": [
+            "1220"
+        ],
+        "speedMbps": 1000,
+        "pricePerMonth": 55,
+        "contractTermMonths": 24
+    },
+    {
+        "provider": "BroadbandPlus",
+        "zip": [
+            "1010",
+            "1040",
+            "1050"
+        ],
+        "speedMbps": 100,
+        "pricePerMonth": 19.9,
+        "contractTermMonths": 12
+    },
+    {
+        "provider": "NetConnect",
+        "zip": [
+            "1060",
+            "1080"
+        ],
+        "speedMbps": 200,
+        "pricePerMonth": 34.9,
+        "contractTermMonths": 12
+    },
+    {
+        "provider": "UltraSpeed",
+        "zip": [
+            "1090",
+            "1100"
+        ],
+        "speedMbps": 1000,
+        "pricePerMonth": 49.9,
+        "contractTermMonths": 24
+    },
+    {
+        "provider": "Streamline",
+        "zip": [
+            "1010",
+            "1020",
+            "1030"
+        ],
+        "speedMbps": 150,
+        "pricePerMonth": 24.9,
+        "contractTermMonths": 12
+    },
+    {
+        "provider": "ConnectNow",
+        "zip": [
+            "1040",
+            "1050",
+            "1060"
+        ],
+        "speedMbps": 300,
+        "pricePerMonth": 44.9,
+        "contractTermMonths": 24
+    },
+    {
+        "provider": "SpeedyNet",
+        "zip": [
+            "1070",
+            "1080",
+            "1090"
+        ],
+        "speedMbps": 500,
+        "pricePerMonth": 59.9,
+        "contractTermMonths": 12
+    },
+    {
+        "provider": "FiberOptic",
+        "zip": [
+            "1100",
+            "1110"
+        ],
+        "speedMbps": 1000,
+        "pricePerMonth": 69.9,
+        "contractTermMonths": 24
+    }
 ]

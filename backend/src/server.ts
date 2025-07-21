@@ -1,7 +1,29 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import * as path from 'path';
 import * as fs from 'fs';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import path from 'path';
+
+dotenv.config({
+  path: path.resolve(__dirname, '../../.env'),
+   override: true
+});
+import { Electricity } from './models/Electricity';
+import { Internet }    from './models/Internet';
+
+// read MONGODB_URL from env (fall back to localhost)
+const mongoUrl =
+  process.env.MONGODB_URL ||
+  'mongodb://127.0.0.1:27017/tariffs-demo';
+
+mongoose
+  .connect(mongoUrl)
+  .then(() => console.log('✅ MongoDB connected'))
+  .catch(err => {
+    console.error('❌ MongoDB connection error:', err);
+    process.exit(1);
+  });
 
 type ElectricityRow = {
   provider: string;
@@ -34,54 +56,49 @@ app.use(cors());
 
 app.get('/healthz', (_req: Request, res: Response) => res.send('ok 🎉'));
 
-app.get('/api/electricity/zips', (_req: Request, res: Response) => {
-  const zips = Array.from(new Set(electricity.flatMap(r => r.zip))).sort();
-  res.json(zips);
+// Electricity ZIPs
+app.get('/api/electricity/zips', async (_req, res) => {
+  const zips = await Electricity.distinct('zip');
+  res.json((zips as string[]).sort());
 });
 
-app.get('/api/electricity/quotes', (req: Request, res: Response) => {
-  const { zip, kwh } = req.query as { zip?: string; kwh?: string };
-
-  if (!zip || !kwh) {
-    return res.status(400).json({ error: 'Missing zip or kwh query param' });
-  }
-
+// Electricity quotes
+app.get('/api/electricity/quotes', async (req, res) => {
+  const { zip, kwh } = req.query as never;
+  if (!zip || !kwh) return res.status(400).json({ error: 'Missing params' });
   const usage = parseInt(kwh, 10);
-  const offers = electricity
-    .filter(row => row.zip.includes(zip))
-    .map(row => ({
-      provider: row.provider,
-      pricePerYear: +(row.basePrice + usage * row.pricePerKWh - row.bonus).toFixed(2),
-      bonus: row.bonus,
-      contractTermMonths: row.contractTermMonths,
-    }))
-    .sort((a, b) => a.pricePerYear - b.pricePerYear);   // cheapest first
 
+  const rows = await Electricity.find({ zip });
+  const offers = rows.map(r => ({
+    provider: r.provider,
+    pricePerYear: +(r.basePrice + usage * r.pricePerKWh - r.bonus).toFixed(2),
+    bonus: r.bonus,
+    contractTermMonths: r.contractTermMonths,
+  }));
   res.json(offers);
 });
 
-app.get('/api/internet/zips', (_req: Request, res: Response) => {
-  const zips = Array.from(
-    new Set(internetData.flatMap(r => r.zip))
-  ).sort()
-  res.json(zips)
-})
+// Internet ZIPs
+app.get('/api/internet/zips', async (_req, res) => {
+  const zips = await Internet.distinct('zip');
+  res.json((zips as string[]).sort());
+});
 
-app.get('/api/internet/quotes', (req: Request, res: Response) => {
-  const { zip, speed } = req.query as { zip?: string; speed?: string }
-  if (!zip || !speed) return res.status(400).json({ error: 'Missing params' })
+// Internet quotes
+app.get('/api/internet/quotes', async (req, res) => {
+  const { zip, speed } = req.query as never;
+  if (!zip || !speed) return res.status(400).json({ error: 'Missing params' });
+  const mbps = parseInt(speed, 10);
 
-  const mbps = parseInt(speed, 10)
-  const offers = internetData
-    .filter(r => r.zip.includes(zip) && mbps <= r.speedMbps)
-    .map(r => ({
-      provider: r.provider,
-      pricePerMonth: r.pricePerMonth,
-      speedMbps: r.speedMbps,
-      contractTermMonths: r.contractTermMonths
-    }))
-  res.json(offers)
-})
+  const rows = await Internet.find({ zip, speedMbps: { $gte: mbps } });
+  const offers = rows.map(r => ({
+    provider:       r.provider,
+    pricePerMonth:  r.pricePerMonth,
+    speedMbps:      r.speedMbps,
+    contractTermMonths: r.contractTermMonths,
+  }));
+  res.json(offers);
+});
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Backend listening on http://localhost:${PORT}`));
