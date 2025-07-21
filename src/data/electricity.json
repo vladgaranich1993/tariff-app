@@ -1,0 +1,50 @@
+[
+  {
+    "provider": "ElecStar",
+    "zip": ["1010", "1020", "1030"],
+    "basePrice": 120,
+    "pricePerKWh": 0.22,
+    "contractTermMonths": 12,
+    "bonus": 50                    
+  },
+  {
+    "provider": "Voltastic",
+    "zip": ["1010", "1090"],
+    "basePrice": 90,
+    "pricePerKWh": 0.24,
+    "contractTermMonths": 12,
+    "bonus": 30
+  },
+  {
+    "provider": "PowerPlus",
+    "zip": ["1020", "1030", "1040"],
+    "basePrice": 110,
+    "pricePerKWh": 0.21,
+    "contractTermMonths": 24,
+    "bonus": 70
+  },
+  {
+    "provider": "GreenWatt",
+    "zip": ["1010", "1050"],
+    "basePrice": 100,
+    "pricePerKWh": 0.20,
+    "contractTermMonths": 12,
+    "bonus": 40
+  },
+  {
+    "provider": "EcoPower",
+    "zip": ["1060", "1070"],
+    "basePrice": 130,
+    "pricePerKWh": 0.19,
+    "contractTermMonths": 12,
+    "bonus": 60
+  },
+  {
+    "provider": "SolarGrid",
+    "zip": ["1080", "1090"],
+    "basePrice": 140,
+    "pricePerKWh": 0.18,
+    "contractTermMonths": 24,
+    "bonus": 80
+  }
+]
