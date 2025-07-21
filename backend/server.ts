@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import path from 'path';
 import fs from 'fs';
@@ -22,9 +22,9 @@ const electricity: ElectricityRow[] = JSON.parse(
 const app = express();
 app.use(cors());
 
-app.get('/healthz', (_, res) => res.send('ok 🎉'));
+app.get('/healthz', (_req: Request, res: Response) => res.send('ok 🎉'));
 
-app.get('/api/electricity/quotes', (req, res) => {
+app.get('/api/electricity/quotes', (req: Request, res: Response) => {
   const { zip, kwh } = req.query as { zip?: string; kwh?: string };
 
   if (!zip || !kwh) {
@@ -45,6 +45,5 @@ app.get('/api/electricity/quotes', (req, res) => {
   res.json(offers);
 });
 
-// ----------------------------------------
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Backend listening on http://localhost:${PORT}`));
