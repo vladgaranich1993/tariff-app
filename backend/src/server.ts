@@ -11,7 +11,6 @@ dotenv.config({
 import { Electricity } from './models/Electricity';
 import { Internet }    from './models/Internet';
 
-// read MONGODB_URL from env (fall back to localhost)
 const mongoUrl =
   process.env.MONGODB_URL ||
   'mongodb://127.0.0.1:27017/tariffs-demo';

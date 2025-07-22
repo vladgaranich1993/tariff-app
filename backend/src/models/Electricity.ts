@@ -1,4 +1,3 @@
-// backend/src/models/Electricity.ts
 import { Schema, model, Document } from 'mongoose';
 
 export interface IElectricity extends Document {
