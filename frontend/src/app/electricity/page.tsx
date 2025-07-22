@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useEffect, useState } from 'react';
+import { apiFetch } from '@/lib/api';
 
 const schema = z.object({
   zip: z.string().length(4, '4‑digit ZIP'),
@@ -22,7 +23,7 @@ type FormData = z.infer<typeof schema>;
 export default function CompareWizard() {
   const [zips, setZips] = useState<string[]>([]);
   useEffect(() => {
-    fetch('/api/electricity/zips')
+    apiFetch('/api/electricity/zips')
       .then(res => res.json())
       .then(setZips)
       .catch(console.error);

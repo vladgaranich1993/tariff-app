@@ -3,8 +3,9 @@
 import { useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
 import ResultsTable from '@/components/ResultsTable';
+import { apiFetch } from '@/lib/api';
 
-const fetcher = (url: string) => fetch(url).then(r => r.json());
+const fetcher = (url: string) => apiFetch(url).then(r => r.json());
 
 export default function InternetResults() {
   const params = useSearchParams();
