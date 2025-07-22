@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "rootDir": "src",
+    "outDir": "dist",
+    "module": "commonjs",
     "target": "ES2020",
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "strict": true,
-    "outDir": "dist"
+    "strict": true
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
