@@ -11,12 +11,5 @@
     "backend": "npm run --workspace backend dev",
     "lint": "npm run --workspace frontend lint && npm run --workspace backend lint"
   },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "mongoose": "^8.16.4"
-  },
-  "devDependencies": {
-    "@types/cors": "^2.8.19",
-    "@types/mongoose": "^5.11.96"
-  }
+  "devDependencies": {}
 }

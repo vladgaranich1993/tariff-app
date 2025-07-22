@@ -1,7 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
-
 export type Column = { key: string; label: string };
 
 interface Props {
